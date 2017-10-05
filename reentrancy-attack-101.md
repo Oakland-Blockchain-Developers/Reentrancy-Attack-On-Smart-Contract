@@ -230,7 +230,7 @@ attacker.then(contract => contract.attack())
 The `.attack()` method above is going to run recursively 10 times, because of the
 conditional in our `default payable` function. 
 
-Now if everything is done correctly, we can see the reflection of what happen
+Now if everything is done correctly, we can see the reflection of what happened
 by checking the `Victim` and `Attacker`'s balances.
 
 ```
@@ -249,3 +249,8 @@ So as you can see the `Victim`'s contract is missing an additional `10` eth!!!
 
 7. The Attack!!!
 
+So the attacker finds a contract to attack, gets the contract's address and creates an
+`Attacker` contract with an instances of the `Victim`'s contract to call against and targets the 
+the deployed `Victim`'s contract by address. Onces it has all of those variables in place, the attacker can 
+deploy the malicious contract to the Ethereum network and then call the `.attack()` method to drain 
+the `Victim`s address.
