@@ -220,6 +220,9 @@ truffle(development)> web3.fromWei(getBalance(attackerAddress).toString())
 There shouldn't be any funds unless you've been stealing already!
 After we have our scenario (all our variables set up). We can `contract.attack()`.
 
+So from our `Attacker` contract instance we are going to call the `.attack()` method
+that will then call the `Victim` contract instance's `withdraw()` method.
+
 ```
 attacker.then(contract => contract.attack())
 ```
@@ -246,5 +249,3 @@ So as you can see the `Victim`'s contract is missing an additional `10` eth!!!
 
 7. The Attack!!!
 
-So from our `Attacker` contract instance we are going to call the `.attack()` method
-that will then call the `Victim` contract instance's `withdraw()` method.
