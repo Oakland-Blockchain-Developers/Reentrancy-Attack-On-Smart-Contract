@@ -1,5 +1,5 @@
 # Recreating Reentrancy Attack
-The document below goes through a "reentrancecy attack" scenario using 2 smart contract, a "Victim" and an "Attacker" contracts.
+The document below goes through a "reentrancy attack" scenario using 2 smart contract, a "Victim" and an "Attacker" contracts.
 
 ## Instructions
 
@@ -139,7 +139,7 @@ truffle(development)> victim = Victim.deployed()
 We'll also store our `Victim`'s contract address, so we can interact with it later.
 
 ```
-truffle(development)> victimAddress  = victim.then(contract  => contract.address)
+truffle(development)> victimAddress = victim.then(contract => contract.address)
 ```
 
 Now lets create a utility function so we can check address balance's and save key strokes.
@@ -166,7 +166,7 @@ Now we are going to send our `Victim` contract some `ether`
 from the `acct1` address we unlocked earlier.
 
 ```
-truffle(development)> victim.then(contract  => contract.deposit.sendTransaction({from: acct1, to: contractAddress, value: web3.toWei(11, 'ether')}))
+truffle(development)> victim.then(contract => contract.deposit.sendTransaction({from: acct1, to: contractAddress, value: web3.toWei(11, 'ether')}))
 ```
 
 So there's alot going on in this line of code, so lets break it down. Our
