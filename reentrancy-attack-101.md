@@ -139,7 +139,7 @@ truffle(development)> victim = Victim.deployed()
 We'll also store our `Victim`'s contract address, so we can interact with it later.
 
 ```
-truffle(development)> victimAddress = victim.then(contract => contract.address)
+truffle(development)> victim.then(contract => victimAddress = contract.address)
 ```
 
 Now lets create a utility function so we can check address balance's and save key strokes.
@@ -208,7 +208,7 @@ attacker = Attacker.deployed()
 ```
 
 ```
-attackerAddress = attacker.then(contract => contract.address)
+attacker.then(contract => attackerAddress = contract.address)
 ```
 
 ```
