@@ -166,7 +166,7 @@ Now we are going to send our `Victim` contract some `ether`
 from the `acct1` address we unlocked earlier.
 
 ```
-truffle(development)> victim.then(contract => contract.deposit.sendTransaction({from: acct1, to: contractAddress, value: web3.toWei(11, 'ether')}))
+truffle(development)> victim.then(contract => contract.deposit.sendTransaction({from: acct1, to: victimAddress, value: web3.toWei(11, 'ether')}))
 ```
 
 So there's alot going on in this line of code, so lets break it down. Our
