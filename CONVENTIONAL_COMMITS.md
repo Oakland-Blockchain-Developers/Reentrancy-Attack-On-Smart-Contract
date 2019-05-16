@@ -166,3 +166,5 @@ The first draft of this specification has been written in collaboration with som
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
 _want your project on this list?_ [send a pull request](https://github.com/conventional-changelog/conventionalcommits.org/pulls).
+
+<A CHANGE>
