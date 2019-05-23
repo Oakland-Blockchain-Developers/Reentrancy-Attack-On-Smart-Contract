@@ -49,28 +49,3 @@ To get started, [fork](https://help.github.com/articles/fork-a-repo/) or [duplic
 
 How to contribute, build and release are outlined in [CONTRIBUTING.md](CONTRIBUTING.md), [BUILDING.md](BUILDING.md) and [RELEASING.md](RELEASING.md) respectively. Commits in this repository follow the [CONVENTIONAL_COMMITS.md](CONVENTIONAL_COMMITS.md) specification.
 
-- README changes: 1
-- README changes: 2
-- README changes: 3
-- README changes: 4
-- README changes: 5
-- README changes: 6
-- README changes: 7
-- README changes: 8
-- README changes: 9
-- README changes: 10
-- README changes: 11
-- README changes: 12
-- README changes: 13
-- README changes: 14
-- README changes: 16
-- README changes: 17
-- README changes: 18
-- README changes: 19
-- README changes: 20
-- README changes: 20
-- README changes: 21
-- README changes: 22
-- README changes: 23
-- README changes: 24
-- README changes: 25
