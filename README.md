@@ -55,3 +55,12 @@ How to contribute, build and release are outlined in [CONTRIBUTING.md](CONTRIBUT
 - README changes: 4
 - README changes: 5
 - README changes: 6
+- README changes: 7
+- README changes: 8
+- README changes: 9
+- README changes: 10
+- README changes: 11
+- README changes: 12
+- README changes: 13
+- README changes: 14
+- README changes: 15
