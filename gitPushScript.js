@@ -10,8 +10,8 @@ async function runScript() {
   try {
     await execFunc(`echo "- README changes: ${arg}" >> README.md`)
     await execFunc('git add README.md');
-    await execFunc(`git commit -m "${process.argv[2]}"`);
-    execFunc('git push');
+    await execFunc(`git commit --amend --no-edit`);
+    execFunc('git push -f');
   } catch (error) {
     throw error;
   }
