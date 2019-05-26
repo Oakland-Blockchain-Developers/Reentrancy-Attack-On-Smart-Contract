@@ -1,5 +1,7 @@
 # Contributing
 
+added change
+
 > This document is inspired by [elasticsearch/CONTRIBUTING.md](https://github.com/elastic/elasticsearch/blob/master/CONTRIBUTING.md)
 
 Adding a `CONTRIBUTING.md` to a Github repository enables a link to that file in the pull request or create an issue page. This document should guide potential contributors toward making a successful and meaningful impact on the project, and can save maintainers time and hassle caused by improper pull requests and issues. You can learn more about the features that are enabled by Github when this file is present [here](https://help.github.com/articles/setting-guidelines-for-repository-contributors/).
