@@ -52,3 +52,6 @@ How to contribute, build and release are outlined in [CONTRIBUTING.md](CONTRIBUT
 - README changes: git test
 - README changes: git test 1
 - README changes: git test 2
+- README changes: git test 2
+- README changes: git test 3
+- README changes: git test 4
